@@ -1,0 +1,31 @@
+name: ShellCheck Linter 
+
+# Запускать при любом пуше или пул-реквесте в ветку main 
+on: 
+  push: 
+    branches: [ main ] 
+  pull_request: 
+    branches: [ main ] 
+
+jobs: 
+  shellcheck: 
+    name: Run ShellCheck 
+    runs-on: ubuntu-latest 
+    
+    steps: 
+      # 1. Скачиваем код вашего репозитория на виртуальную машину 
+      - name: Checkout repository 
+        uses: actions/checkout@v4 
+      
+      # 2. Устанавливаем утилиту ShellCheck 
+      - name: Install ShellCheck 
+        run: | 
+          sudo apt-get update 
+          sudo apt-get install -y shellcheck 
+      
+      # 3. Запускаем проверку 
+      # '--severity=style' проверяет всё, включая стилистические рекомендации. 
+      # Если хотите только ошибки, используйте '--severity=error' 
+      - name: Run ShellCheck on shell scripts 
+      run: | 
+        find . -name "*.sh" -type f | xargs shellcheck --severity=style
