@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="38 38 164 154" xmlns="http://www.w3.org/2000/svg">
+  <!-- Пятиугольник -->
+  <path d="M120,40 L200,105 L175,190 L65,190 L40,105 Z" fill="red" stroke="blue" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter" />
+  
+  <!-- Буква К (лучи) -->
+  <g stroke="#000000" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- Основание треугольника -->
+    <path d="M 50.000508,104.99984 120,115 189.99949,104.99984 Z" fill="white" stroke="white" />
+    <!-- Лучи буквы К -->
+    <path d="M 120,123.28008 69.999219,183.27941 120,143.28039 l 50.00078,39.99902 z" stroke="white" fill="white" />
+  </g>
+  
+  <!-- Текст "САМ" -->
+  <text x="30.581623" y="129.80675" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="28px" text-anchor="middle" letter-spacing="3" fill="white" transform="rotate(-38.277425)">САМ</text>
+  
+  <!-- Текст "ИЗДАТ" -->
+  <text x="171.40231" y="-29.556297" font-family="Arial Black, Impact, sans-serif" font-weight="900" font-size="14px" text-anchor="middle" letter-spacing="1.2" fill="white" transform="rotate(38.896607)">ИЗДАТ</text>
+</svg>
