@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest 
     
     steps: 
-      # 1. Скачиваем код вашего репозитория на виртуальную машину 
+    # 1. Скачиваем код вашего репозитория на виртуальную машину 
       - name: Checkout repository 
         uses: actions/checkout@v4 
       
