@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest 
     
     steps: 
-    # 1. Скачиваем код вашего репозитория на виртуальную машину 
+      # 1. Скачиваем код вашего репозитория на виртуальную машину 
       - name: Checkout repository 
         uses: actions/checkout@v4 
       
@@ -27,5 +27,5 @@ jobs:
       # '--severity=style' проверяет всё, включая стилистические рекомендации. 
       # Если хотите только ошибки, используйте '--severity=error' 
       - name: Run ShellCheck on shell scripts 
-      run: | 
-        find . -name "*.sh" -type f | xargs shellcheck --severity=style
+        run: | 
+          find . -name "*.sh" -type f | xargs shellcheck --severity=style
