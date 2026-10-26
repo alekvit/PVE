@@ -6,7 +6,7 @@
 
 | Метрика <br><sub><small>Downloads</small></sub> | **Гитхаб**  <br><sub><small>GitHub</small></sub> | **Гитверс** <br><sub><small>GitVerse</small></sub> |
 | --- | --- | --- |
-| Добро / ПРП <br><sub><small>License</small></sub> | [![License](https://img.shields.io/github/license/alekvit/PVE/traefik/LICENSE)](https://github/license/alekvit/PVE/blob/master/traefik/LICENSE) | [![License](https://img.shields.io/gitea/license?server=https%3A%2F%2Fgitverse.ru/alekvit/PVE/content/master/traefik/LICENSE)](https://gitverse.ru/alekvit/PVE/content/master/traefik/LICENSE) |
+| Добро / ПРП <br><sub><small>License</small></sub> | [![License](https://img.shields.io/github/license/alekvit/PVE)](LICENSE) | [![License](https://img.shields.io/gitea/license?server=https%3A%2F%2Fgitverse.ru/alekvit/PVE)](LICENSE) |
 | Издание <br><sub><small>Release</small></sub> | [![Release](https://img.shields.io/github/v/release)](releases) | [![Release](https://img.shields.io/gitea/v/release/latest?server=https%3A%2F%2Fgitverse.ru)](releases) |
 | Сборка / Проверка <br><sub><small>CI / Lint</small></sub> | [![ShellCheck](https://img.shields.io/github/actions/workflow/status/alekvit/PVE/shellcheck.yml?label=ShellCheck&style=flat-square)](https://github.com/alekvit/PVE/actions/workflows/shellcheck.yml) | [![CI](https://img.shields.io/badge/CI-Manual-lightgrey?style=flat-square&logo=gitea)](https://gitverse.ru/alekvit/PVE) |
 | Загружено <br><sub><small>Downloads</small></sub> | [![Downloads](https://img.shields.io/github/downloads/alekvit/PVE/total?style=flat-square&color=blue)](https://github.com/alekvit/PVE/releases) | --- |
