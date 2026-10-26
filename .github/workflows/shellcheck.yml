@@ -19,7 +19,7 @@ jobs:
       
       # 2. Устанавливаем утилиту ShellCheck 
       - name: Install ShellCheck 
-        run: | 
+        run: |
           sudo apt-get update 
           sudo apt-get install -y shellcheck 
       
@@ -27,5 +27,5 @@ jobs:
       # '--severity=style' проверяет всё, включая стилистические рекомендации. 
       # Если хотите только ошибки, используйте '--severity=error' 
       - name: Run ShellCheck on shell scripts 
-        run: | 
+        run: |
           find . -name "*.sh" -type f | xargs shellcheck --severity=style
