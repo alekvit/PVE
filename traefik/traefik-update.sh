@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # cat /usr/local/bin/update-traefik.sh 
 
-# Приложение обновляет Traefik до последней версии из GitHub Release
+# Предназначение: обновление двоичного Traefik до последней версии из GitHub Release
 
 # Исполнитель: Александр Витальевич
 # Площадки: [GitHub](https://github.com/alekvit), [GitVerse](https://gitverse.ru/alekvit), [личный сайт](https://зодчий.москва)
