@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # cat /usr/local/bin/update-traefik.sh 
 
 # Приложение обновляет Traefik до последней версии из GitHub Release
@@ -47,21 +46,21 @@ CURRENT_VERSION=""
 # --- Функции логирования ---
 log() {
     local msg
-    msg="[$(date '+%H:%M:%S')] $1"
+    msg="[$(date '+%H:%M:%S')] [LOG] $1"
     echo -e "${GREEN}$msg${NC}"
     echo "$msg" >> "$LOG_FILE" 2>/dev/null || true
 }
 
 warn() {
     local msg
-    msg="[$(date '+%H:%M:%S')] $1"
+    msg="[$(date '+%H:%M:%S')] [WARN] $1"
     echo -e "${YELLOW}$msg${NC}"
     echo "$msg" >> "$LOG_FILE" 2>/dev/null || true
 }
 
 error_exit() {
     local msg
-    msg="[$(date '+%H:%M:%S')] $1"
+    msg="[$(date '+%H:%M:%S')] [ERROR] $1"
     echo -e "${RED}$msg${NC}" >&2
     echo "$msg" >> "$LOG_FILE" 2>/dev/null || true
     
@@ -72,7 +71,7 @@ error_exit() {
 
 info() {
     local msg
-    msg="[$(date '+%H:%M:%S')] $1"
+    msg="[$(date '+%H:%M:%S')] [INFO] $1"
     echo -e "${BLUE}$msg${NC}"
     echo "$msg" >> "$LOG_FILE" 2>/dev/null || true
 }
@@ -83,10 +82,10 @@ info() {
 version_greater_equal() {
     # local ver_a=(${1//./ })
     # local ver_b=(${2//./ })
-    local -a ver_a
-    IFS=. read -ra ver_a <<< "$1"
-    local -a ver_b
-    IFS=. read -ra ver_b <<< "$2"
+    #local -a ver_a
+    IFS='.' read -r -a ver_a <<< "$1"
+    #local -a ver_b
+    IFS='.' read -r -a ver_b <<< "$2"
     for ((i=0; i<3; i++)); do
         a=${ver_a[i]:-0}
         b=${ver_b[i]:-0}
@@ -438,7 +437,7 @@ ARCHIVE_NAME=""
 CHECKSUM_URL=""
 
 EXPECTED_SHA="" 
-EXPECTED_SHA_URL=""
+#EXPECTED_SHA_URL=""
 
 # 1. Находим URL архива для нашей архитектуры
 
