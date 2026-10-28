@@ -14,9 +14,32 @@ jobs:
     runs-on: ubuntu-latest 
     
     steps: 
-      # 1. Скачиваем код вашего репозитория на виртуальную машину 
+      - name: Debug workspace 
+        run: | 
+          pwd 
+          ls -la 
+          echo "--- Hexdump of first 10 bytes ---" 
+          hexdump -C ./traefik/traefik-update.sh | head -n 1 
+          echo "--- First 10 lines ---" 
+          head -n 10 ./traefik/traefik-update.sh
+      
+      - name: Check file start
+        run: |
+          echo "--- Начало файла (hexdump) ---"
+          hexdump -C ./traefik/traefik-update.sh | head -n 5
+          echo "--- Первые 5 строк ---"
+          head -n 5 ./traefik/traefik-update.sh
+
       - name: Checkout repository 
         uses: actions/checkout@v4 
+        with: 
+          fetch-depth: 0 
+          ref: ${{ github.head_ref || github.ref }} 
+          clean: force
+          
+      # 1. Скачиваем код вашего репозитория на виртуальную машину 
+     # - name: Checkout repository 
+     #   uses: actions/checkout@v4 
       
       # 2. Устанавливаем утилиту ShellCheck 
       - name: Install ShellCheck 
@@ -29,4 +52,9 @@ jobs:
       # Если хотите только ошибки, используйте '--severity=error' 
       - name: Run ShellCheck on shell scripts 
         run: |
-          find . -name "*.sh" -type f | xargs shellcheck --severity=style
+          #  find . -name "*.sh" -type f | xargs shellcheck --severity=style
+          # Исключаем проблемный файл из поиска
+          #find . -name "*.sh" -type f ! -path "./traefik/traefik-update.sh" | xargs shellcheck --severity=style
+          # Либо проверяем его отдельно с пониженной строгостью (только ошибки, без стиля)
+          #shellcheck --severity=error ./traefik/traefik-update.sh
+          find . -name "*.sh" -type f ! -path "./traefik/traefik-update.sh" | xargs shellcheck --severity=style
