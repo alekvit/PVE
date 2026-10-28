@@ -14,6 +14,15 @@ jobs:
     runs-on: ubuntu-latest 
     
     steps: 
+      - name: Debug workspace 
+        run: | 
+          pwd 
+          ls -la 
+          echo "--- Hexdump of first 10 bytes ---" 
+          hexdump -C ./traefik/traefik-update.sh | head -n 1 
+          echo "--- First 10 lines ---" 
+          head -n 10 ./traefik/traefik-update.sh
+      
       - name: Check file start
         run: |
           echo "--- Начало файла (hexdump) ---"
