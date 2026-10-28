@@ -14,6 +14,13 @@ jobs:
     runs-on: ubuntu-latest 
     
     steps: 
+      - name: Check file start
+        run: |
+          echo "--- Начало файла (hexdump) ---"
+          hexdump -C ./traefik/traefik-update.sh | head -n 5
+          echo "--- Первые 5 строк ---"
+          head -n 5 ./traefik/traefik-update.sh
+          
       # 1. Скачиваем код вашего репозитория на виртуальную машину 
       - name: Checkout repository 
         uses: actions/checkout@v4 
