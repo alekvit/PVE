@@ -59,6 +59,9 @@ jobs:
           find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" | sort
           echo "Поиск по расширениям .sh, .bash, .zsh:"
           find . $ -name "*.sh" -o -name "*.bash" -o -name "*.zsh" $ -type f -not -path "./traefik/traefik-update.sh" -not -path "*/.*" | sort
+          echo "--- Поиск исполняемых файлов (кроме скрытых папок) ---" 
+          # Добавлено условие -not -path '*/.*/*', чтобы искать скрипты внутри скрытых директорий 
+          find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" -not -path '*/.*/*' | sort
       
       # 2. Устанавливаем утилиту ShellCheck 
       - name: Install ShellCheck 
@@ -76,7 +79,8 @@ jobs:
       # Проверяем все исполняемые файлы, кроме проблемного 
       - name: Run ShellCheck on executable scripts 
         run: | 
-          find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" -print0 | xargs -0 shellcheck --severity=style
+         # find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" -print0 | xargs -0 shellcheck --severity=style
+          find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" -not -path '*/.*/*' -print0 | xargs -0 shellcheck --severity=style
       
       # Проверяем сам проблемный файл отдельно (только на ошибки, без стилистических замечаний) 
       - name: Run ShellCheck on traefik-update.sh 
