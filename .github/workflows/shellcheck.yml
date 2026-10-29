@@ -3,9 +3,9 @@ name: ShellCheck Linter
 # Запускать при любом пуше или пул-реквесте в ветку main 
 on: 
   push: 
-    branches: [ main ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs: 
@@ -77,21 +77,37 @@ jobs:
       # '--severity=style' проверяет всё, включая стилистические рекомендации. 
       # Если хотите только ошибки, используйте '--severity=error' 
       # Проверяем все исполняемые файлы, кроме проблемного 
-      - name: Run ShellCheck on executable scripts 
-        run: | 
+      #- name: Run ShellCheck on executable scripts 
+      #  run: | 
          # find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" -print0 | xargs -0 shellcheck --severity=style
-          find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" -not -path '*/.*/*' -print0 | xargs -0 shellcheck --severity=style
+         # find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" -not -path '*/.*/*' -print0 | xargs -0 shellcheck --severity=style
       
       # Проверяем сам проблемный файл отдельно (только на ошибки, без стилистических замечаний) 
       - name: Run ShellCheck on traefik-update.sh 
         run: | 
           shellcheck --severity=error ./traefik/traefik-update.sh
       
-      #- name: Run ShellCheck on shell scripts 
-      #  run: |
-          #  find . -name "*.sh" -type f | xargs -0 shellcheck --severity=style
+      - name: Run ShellCheck on shell scripts 
+        run: |
+          # Собираем список всех .sh файлов, кроме проблемного 
+          mapfile -t SCRIPTS < <(find . -name "*.sh" ! -name "traefik-update.sh" -print)
+          
+          if [ ${#SCRIPTS[@]} -eq 0 ]; then 
+            echo "Скрипты для проверки не найдены." 
+            exit 0 
+          fi 
+          
+          echo "Найдены скрипты для проверки:" 
+          printf '%s\n' "${SCRIPTS[@]}" 
+          
+          # Передаем их в shellcheck 
+          shellcheck --severity=style "${SCRIPTS[@]}"
+          
+          #find . -name "*.sh" -type f | xargs -0 shellcheck --severity=style
           # Исключаем проблемный файл из поиска
           #find . -name "*.sh" -type f ! -path "./traefik/traefik-update.sh" | xargs shellcheck --severity=style
+          
           # Либо проверяем его отдельно с пониженной строгостью (только ошибки, без стиля)
-          #shellcheck --severity=error ./traefik/traefik-update.sh
-         # find . -name "*.sh" -type f ! -path "./traefik/traefik-update.sh" | xargs shellcheck --severity=style
+          shellcheck --severity=error ./traefik/traefik-update.sh
+         
+          #find . -name "*.sh" -type f ! -path "./traefik/traefik-update.sh" | xargs shellcheck --severity=style
