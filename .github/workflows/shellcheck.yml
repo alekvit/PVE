@@ -46,6 +46,13 @@ jobs:
           head -n 5 ./traefik/traefik-update.sh 
           echo "--- Права на файл ---" 
           ls -la ./traefik/traefik-update.sh
+
+      - name: Debug found files
+        run: |
+          echo "Поиск всех исполняемых файлов:"
+          find . -type f -executable -not -path "./traefik/traefik-update.sh" -not -path "*/.*" | sort
+          echo "Поиск по расширениям .sh, .bash, .zsh:"
+          find . $ -name "*.sh" -o -name "*.bash" -o -name "*.zsh" $ -type f -not -path "./traefik/traefik-update.sh" -not -path "*/.*" | sort
       
       # 2. Устанавливаем утилиту ShellCheck 
       - name: Install ShellCheck 
