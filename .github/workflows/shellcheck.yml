@@ -13,7 +13,18 @@ jobs:
     name: Run ShellCheck 
     runs-on: ubuntu-latest 
     
-    steps: 
+    steps:          
+      # 1. Скачиваем код вашего репозитория на виртуальную машину 
+      - name: Checkout repository 
+        uses: actions/checkout@v4 
+        with: 
+          # Чистим директорию от мусора предыдущих запусков 
+          clean: force 
+          # Гарантируем, что берем актуальный HEAD 
+          ref: ${{ github.head_ref || github.ref }} 
+          fetch-depth: 0
+
+      # 2. Отладка: смотрим, что именно скачалось 
       - name: Debug workspace 
         run: | 
           pwd 
@@ -24,21 +35,7 @@ jobs:
           hexdump -C ./traefik/traefik-update.sh | head -n 5
           echo "--- First 10 lines ---" 
           head -n 10 ./traefik/traefik-update.sh
-
-      - name: Checkout repository 
-        uses: actions/checkout@v4 
-        with: 
-          # Чистим директорию от мусора предыдущих запусков 
-          clean: force 
-          # Гарантируем, что берем актуальный HEAD 
-          ref: ${{ github.head_ref || github.ref }} 
-          fetch-depth: 0
           
-      # 1. Скачиваем код вашего репозитория на виртуальную машину 
-      # - name: Checkout repository 
-      #   uses: actions/checkout@v4 
-
-      # 2. Отладка: смотрим, что именно скачалось 
       - name: Debug file state 
         run: | 
           echo "Текущая ветка: ${{ github.ref }}" 
