@@ -6,11 +6,11 @@
 
 | Метрика <br><sub><small>Downloads</small></sub> | **Гитхаб**  <br><sub><small>GitHub</small></sub> | **Гитверс** <br><sub><small>GitVerse</small></sub> |
 | --- | --- | --- |
-| Добро / ПРП <br><sub><small>License</small></sub> | [![License](https://img.shields.io/github/license/alekvit/PVE)](LICENSE) | [![License](https://img.shields.io/gitea/license?server=https%3A%2F%2Fgitverse.ru/alekvit/PVE)](LICENSE) |
-| Издание <br><sub><small>Release</small></sub> | [![Release](https://img.shields.io/github/v/release)](releases) | [![Release](https://img.shields.io/gitea/v/release/latest?server=https%3A%2F%2Fgitverse.ru)](releases) |
+| Добро / ПРП <br><sub><small>License</small></sub> | [![License: MIT](https://img.shields.io/github/license/alekvit/PVE)](https://github.com/alekvit/PVE/blob/master/LICENSE) | [![License: MIT](https://img.shields.io/gitea/license?server=https%3A%2F%2Fgitverse.ru/alekvit/PVE)](https://gitverse.ru/alekvit/PVE/content/master/LICENSE) |
+| Издание <br><sub><small>Release</small></sub> | [![Release](https://img.shields.io/github/v/release/alekvit/PVE)](releases) | [![Release](https://img.shields.io/gitea/v/release/latest?server=https%3A%2F%2Fgitverse.ru)](repos/alekvit/PVE/releases) |
 | Сборка / Проверка <br><sub><small>CI / Lint</small></sub> | [![ShellCheck](https://img.shields.io/github/actions/workflow/status/alekvit/PVE/shellcheck.yml?label=ShellCheck&style=flat-square)](https://github.com/alekvit/PVE/actions/workflows/shellcheck.yml) | [![CI](https://img.shields.io/badge/CI-Manual-lightgrey?style=flat-square&logo=gitea)](https://gitverse.ru/alekvit/PVE) |
 | Загружено <br><sub><small>Downloads</small></sub> | [![Downloads](https://img.shields.io/github/downloads/alekvit/PVE/total?style=flat-square&color=blue)](https://github.com/alekvit/PVE/releases) | --- |
-| Звезды <br><sub><small>Stars</small></sub> | [![Github Stars](https://badgen.net/badge/icon/github?icon=github&label=Stars&color=00af91)](https://github.com/alekvit/PVE) | [![GitVerse Stars](https://badgen.net/badge/icon/GitVerse?icon=gitea&label=Stars&color=00af91)](https://gitverse.ru/alekvit/PVE) |
+| Звезды <br><sub><small>Stars</small></sub> | [![Github Stars](https://badgen.net/badge/icon/github?icon=github&label=Stars&color=00af91)](https://github.com/alekvit/PVE/stargazers) | [![GitVerse Stars](https://badgen.net/badge/icon/GitVerse?icon=gitea&label=Stars&color=00af91)](https://gitverse.ru/alekvit/PVE) |
 
 # 🔄 Самообновление Traefik
 

@@ -1,0 +1,48 @@
+name: ShellCheck: traefik-update.sh
+
+# Запуск при...
+on:
+  push:
+    branches: [ main, master]
+  pull_request:
+    branches: [ main, master]
+  workflow_dispatch:
+
+# Задачи
+jobs:
+  shellcheck:
+    name: Run ShellCheck traefik-update.sh
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Скачиваем код вашего репозитория на виртуальную машину 
+      - name: Checkout repository 
+        uses: actions/checkout@v4 
+        with: 
+          # Чистим директорию от мусора предыдущих запусков 
+          clean: force 
+          # Гарантируем, что берем актуальный HEAD 
+          ref: ${{ github.head_ref || github.ref }} 
+          fetch-depth: 0
+
+      # Делаем файл исполняемым 
+      - name: Set execute permissions 
+        run: |
+          chmod +x ./traefik/traefik-update.sh
+
+      # 2. Устанавка  ShellCheck 
+      - name: Install ShellCheck 
+        run: |
+          # Очищаем кэш apt, чтобы не подтянуть старую версию 
+          sudo apt-get clean 
+          sudo apt-get update -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false 
+          # --reinstall гарантирует, что мы получим актуальную версию 
+          sudo apt-get install --reinstall -y shellcheck 
+          shellcheck --version 
+
+
+      # 3. Запускаем проверку 
+      # '--severity=style' проверяет всё, включая стилистические рекомендации. 
+      # '--severity=error' проверяет только ошибки
+      - name: Check traefik-update.sh 
+        run: shellcheck --severity=style ./traefik/traefik-update.sh

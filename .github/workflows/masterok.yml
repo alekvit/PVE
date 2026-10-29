@@ -1,0 +1,32 @@
+name: Master proverOK
+
+on:
+  push:
+    branches: [ main, master]
+  pull_request:
+    branches: [ main, master]
+  workflow_dispatch:
+
+jobs:
+  shell-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Check helper .sh scripts
+        run: shellcheck --severity=style ./git-hv.sh
+
+  ps-lint:
+    runs-on: windows-latest # Для PowerShell лучше использовать родной Windows-раннер
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PSScriptAnalyzer
+        run: Install-Module -Name PSScriptAnalyzer -Force -Scope CurrentUser
+      - name: Check git-hv.ps1
+        run: Invoke-ScriptAnalyzer -Path ./git-hv.ps1 -Severity Warning
+
+  # Если добавите Python:
+  # py-lint:
+  #   runs-on: ubuntu-latest
+  #   steps: [...]
