@@ -1,4 +1,4 @@
-name: ShellCheck: traefik-update.sh
+name: ShellCheck traefik-update.sh
 
 # Запуск при...
 on:
