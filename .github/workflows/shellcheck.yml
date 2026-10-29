@@ -47,10 +47,16 @@ jobs:
           echo "--- Права на файл ---" 
           ls -la ./traefik/traefik-update.sh
 
-      - name: Debug found files
-        run: |
-          echo "Поиск всех исполняемых файлов:"
-          find . -type f -executable -not -path "./traefik/traefik-update.sh" -not -path "*/.*" | sort
+      # Делаем файл исполняемым 
+      - name: Set execute permissions 
+        run: chmod +x ./traefik/traefik-update.sh
+
+      - name: Debug file state (after chmod) 
+        run: | 
+          echo "--- Права на файл (после chmod) ---" 
+          ls -la ./traefik/traefik-update.sh 
+          echo "--- Поиск исполняемых файлов ---" 
+          find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" | sort
           echo "Поиск по расширениям .sh, .bash, .zsh:"
           find . $ -name "*.sh" -o -name "*.bash" -o -name "*.zsh" $ -type f -not -path "./traefik/traefik-update.sh" -not -path "*/.*" | sort
       
@@ -67,11 +73,21 @@ jobs:
       # 3. Запускаем проверку 
       # '--severity=style' проверяет всё, включая стилистические рекомендации. 
       # Если хотите только ошибки, используйте '--severity=error' 
-      - name: Run ShellCheck on shell scripts 
-        run: |
+      # Проверяем все исполняемые файлы, кроме проблемного 
+      - name: Run ShellCheck on executable scripts 
+        run: | 
+          find . -type f -executable ! -path "./traefik/traefik-update.sh" -not -path "*/.*" -print0 | xargs -0 shellcheck --severity=style
+      
+      # Проверяем сам проблемный файл отдельно (только на ошибки, без стилистических замечаний) 
+      - name: Run ShellCheck on traefik-update.sh 
+        run: | 
+          shellcheck --severity=error ./traefik/traefik-update.sh
+      
+      #- name: Run ShellCheck on shell scripts 
+      #  run: |
           #  find . -name "*.sh" -type f | xargs -0 shellcheck --severity=style
           # Исключаем проблемный файл из поиска
           #find . -name "*.sh" -type f ! -path "./traefik/traefik-update.sh" | xargs shellcheck --severity=style
           # Либо проверяем его отдельно с пониженной строгостью (только ошибки, без стиля)
           #shellcheck --severity=error ./traefik/traefik-update.sh
-          find . -name "*.sh" -type f ! -path "./traefik/traefik-update.sh" | xargs shellcheck --severity=style
+         # find . -name "*.sh" -type f ! -path "./traefik/traefik-update.sh" | xargs shellcheck --severity=style
