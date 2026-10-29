@@ -18,7 +18,7 @@ repo["gitverse"]="PVE"
 # repo["gitlab"]="my-repo"
 
 if [[ -z "${user[$target]}" || -z "${repo[$target]}" ]]; then
-  echo "Неизвестный таргет: $target. Доступные: ${!user[@]}" >&2
+  echo "Неизвестный таргет: $target. Доступные:" "${!user[@]}" >&2
   exit 1
 fi
 
